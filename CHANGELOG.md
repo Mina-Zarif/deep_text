@@ -1,1 +1,1 @@
-## [1.0.2] - Updated README usage example.
+## [1.0.3] - Updated README usage example.
