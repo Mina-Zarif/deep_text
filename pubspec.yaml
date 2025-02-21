@@ -1,5 +1,5 @@
 name: deep_text
-description: "A new Flutter package project."
+description: "A Flutter package for rendering rich text with support for bold, italic, underline, strikethrough, hashtags, mentions, emails, phone numbers, and URLs with customizable styles and click handlers."
 version: 0.0.1
 homepage: https://github.com/Mina-Zarif/deep_text
 
