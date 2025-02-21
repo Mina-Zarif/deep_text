@@ -18,7 +18,7 @@ DeepText is a Flutter package for rendering rich text with support for:
 
 Here’s how DeepText looks in action:
 
-![DeepText Example](assets/img.png)
+![DeepText Example](https://i.imgur.com/HJmy0QE.jpeg)
 
 ## Usage
 ```dart

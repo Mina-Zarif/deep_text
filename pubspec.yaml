@@ -1,6 +1,6 @@
 name: deep_text
 description: "A Flutter package for rendering rich text with support for bold, italic, underline, strikethrough, hashtags, mentions, emails, phone numbers, and URLs with customizable styles and click handlers."
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/Mina-Zarif/deep_text
 
 environment:
@@ -23,8 +23,8 @@ dev_dependencies:
 flutter:
 
   # To add assets to your package, add an assets section, like this:
-  assets:
-    - assets
+  #assets:
+  #  - assets
   #   - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see
