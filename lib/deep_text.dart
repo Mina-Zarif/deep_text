@@ -1,17 +1,21 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+/// A widget for rendering rich text with support for bold, italic,
+/// underline, strikethrough, code formatting, hashtags, mentions,
+/// emails, phone numbers, and URLs.
 class DeepText extends StatelessWidget {
+  /// The text to be displayed and parsed.
   final String text;
 
-  // Callbacks
+  /// Callbacks for interactions.
   final Function(String)? onHashTagTap;
   final Function(String)? onMentionTap;
   final Function(String)? onEmailTap;
   final Function(String)? onPhoneTap;
   final Function(String)? onUrlTap;
 
-  // Enable/Disable parsing
+  /// Enable/Disable specific formatting features.
   final bool enableBold;
   final bool enableItalic;
   final bool enableUnderline;
@@ -23,8 +27,7 @@ class DeepText extends StatelessWidget {
   final bool enablePhones;
   final bool enableUrls;
 
-
-  // Custom styles
+  /// Custom styles for formatted text elements.
   final TextStyle? boldStyle;
   final TextStyle? italicStyle;
   final TextStyle? underlineStyle;
@@ -37,6 +40,7 @@ class DeepText extends StatelessWidget {
   final TextStyle? urlStyle;
   final TextStyle? defaultStyle;
 
+  /// Creates a DeepText widget with customizable parsing and styling options.
   const DeepText({
     super.key,
     required this.text,
@@ -45,8 +49,6 @@ class DeepText extends StatelessWidget {
     this.onEmailTap,
     this.onPhoneTap,
     this.onUrlTap,
-
-    // Default enabled
     this.enableBold = true,
     this.enableItalic = true,
     this.enableUnderline = true,
@@ -57,20 +59,19 @@ class DeepText extends StatelessWidget {
     this.enableEmails = true,
     this.enablePhones = true,
     this.enableUrls = true,
-
-    // Default styles
     this.boldStyle = const TextStyle(fontWeight: FontWeight.bold),
     this.italicStyle = const TextStyle(fontStyle: FontStyle.italic),
     this.underlineStyle = const TextStyle(decoration: TextDecoration.underline),
     this.strikethroughStyle =
-    const TextStyle(decoration: TextDecoration.lineThrough),
+        const TextStyle(decoration: TextDecoration.lineThrough),
     this.codeStyle = const TextStyle(
         fontFamily: 'monospace', backgroundColor: Color(0xFFEAEAEA)),
     this.hashTagStyle = const TextStyle(color: Colors.blue),
     this.mentionStyle = const TextStyle(color: Colors.green),
     this.emailStyle = const TextStyle(color: Colors.red),
     this.phoneStyle = const TextStyle(color: Colors.purple),
-    this.urlStyle = const TextStyle(color: Colors.orange, decoration: TextDecoration.underline),
+    this.urlStyle = const TextStyle(
+        color: Colors.orange, decoration: TextDecoration.underline),
     this.defaultStyle = const TextStyle(fontSize: 16, color: Colors.black),
   });
 
@@ -84,6 +85,7 @@ class DeepText extends StatelessWidget {
     );
   }
 
+  /// Parses the input text and applies styles based on formatting rules.
   List<TextSpan> _parseText(String input) {
     final RegExp regex = RegExp(
       r'(\*.*?\*)|(_.*?_)|(~.*?~)|(-.*?-)|(`(?:.|\n)*?`)|'
@@ -137,26 +139,27 @@ class DeepText extends StatelessWidget {
         style = mentionStyle!;
         recognizer = TapGestureRecognizer()
           ..onTap = () => onMentionTap?.call(matchText.substring(1));
-      } else if (RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
-          .hasMatch(matchText) &&
-          enableEmails) {
+      } else if (enableEmails &&
+          RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
+              .hasMatch(matchText)) {
         style = emailStyle!;
         recognizer = TapGestureRecognizer()
           ..onTap = () => onEmailTap?.call(matchText);
-      } else if (RegExp(r'(\+?\d{1,3}[-.\s]?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,9})')
-          .hasMatch(matchText) &&
-          enablePhones) {
+      } else if (enablePhones &&
+          RegExp(r'\+?\d{1,3}[-.\s]?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,9}')
+              .hasMatch(matchText)) {
         style = phoneStyle!;
         recognizer = TapGestureRecognizer()
           ..onTap = () => onPhoneTap?.call(matchText);
-      } else if (RegExp(r'https?:\/\/[^\s]+').hasMatch(matchText) &&
-          enableUrls) {
+      } else if (enableUrls &&
+          RegExp(r'https?:\/\/[^\s]+').hasMatch(matchText)) {
         style = urlStyle!;
         recognizer = TapGestureRecognizer()
           ..onTap = () => onUrlTap?.call(matchText);
       }
 
-      spans.add(TextSpan(text: matchText, style: style, recognizer: recognizer));
+      spans
+          .add(TextSpan(text: matchText, style: style, recognizer: recognizer));
       lastMatchEnd = match.end;
     }
 

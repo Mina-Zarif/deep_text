@@ -3,12 +3,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:deep_text/deep_text.dart';
 
 void main() {
-  testWidgets('DeepText renders correctly and applies styles', (WidgetTester tester) async {
+  testWidgets('DeepText renders correctly and applies styles',
+      (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
           body: DeepText(
-            text: "Hello *bold* _italic_ ~underline~ -strikethrough- `code` #Flutter @JohnDoe john.doe@example.com +1234567890 https://flutter.dev",
+            text:
+                "Hello *bold* _italic_ ~underline~ -strikethrough- `code` #Flutter @JohnDoe john.doe@example.com +1234567890 https://flutter.dev",
             enableBold: true,
             enableItalic: true,
             enableUnderline: true,
@@ -19,8 +21,10 @@ void main() {
             enableEmails: true,
             enablePhones: true,
             enableUrls: true,
-            boldStyle: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-            italicStyle: const TextStyle(color: Colors.blue, fontStyle: FontStyle.italic),
+            boldStyle:
+                const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+            italicStyle: const TextStyle(
+                color: Colors.blue, fontStyle: FontStyle.italic),
             onHashTagTap: (tag) => debugPrint("Hashtag clicked: $tag"),
             onMentionTap: (mention) => debugPrint("Mention clicked: $mention"),
             onEmailTap: (email) => debugPrint("Email clicked: $email"),
