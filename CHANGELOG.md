@@ -1,1 +1,1 @@
-## [1.0.3] - Updated README usage example.
+## [1.0.4] - Adding example/main.dart.
